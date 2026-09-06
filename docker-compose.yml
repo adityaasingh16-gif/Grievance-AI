@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: grievance_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  ml-service:
+    build: ./ml-service
+    container_name: grievance_ml_service
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+
+  backend:
+    build: ./backend
+    container_name: grievance_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/grievance_db
+      - ML_SERVICE_URL=http://ml-service:8000
+      - JWT_SECRET=grievance_secret_key_123
+    depends_on:
+      - mongodb
+      - ml-service
+
+  frontend:
+    build: ./frontend
+    container_name: grievance_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

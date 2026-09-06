@@ -1,0 +1,40 @@
+# Node dependencies & caches
+node_modules/
+**/node_modules/
+.cache/
+**/.cache/
+.pnpm-store/
+
+# Build & dev server outputs
+dist/
+build/
+out/
+.vite/
+.next/
+
+# Environment & local config
+.env
+.env.local
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+/**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Archives & binaries
+*.zip
+*.tar.gz
+*.tgz
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
