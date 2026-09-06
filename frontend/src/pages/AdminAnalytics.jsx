@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer
 } from 'recharts'
-import { FileText, CheckCircle, Clock, AlertTriangle, Layers } from 'lucide-react'
+import { FileText, CheckCircle2, Clock, AlertTriangle, Layers, Activity, Sparkles } from 'lucide-react'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16']
@@ -28,96 +28,101 @@ export default function AdminAnalytics() {
     }
   }
 
-  if (loading) return <div className="text-center py-12 text-gray-500 font-medium">Loading platform analytics...</div>
-  if (!data) return <div className="text-center py-12 text-red-500">Failed to load analytics metrics.</div>
+  if (loading) return <div className="text-center py-20 text-slate-500 font-semibold">Loading platform analytics...</div>
+  if (!data) return <div className="text-center py-20 text-rose-500 font-bold">Failed to load analytics metrics.</div>
 
   const { overview, categoryDistribution, departmentLoad, priorityDistribution, weeklyTrend, duplicateClusters } = data
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Platform Intelligence Analytics</h1>
-        <p className="text-sm text-gray-500">DARPG PS-09 real-time metrics, workload distribution &amp; SLA monitoring</p>
+      <div className="flex items-center gap-3">
+        <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-2xl shadow-lg shadow-blue-500/20">
+          <Activity className="w-6 h-6" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Platform Analytics &amp; Governance</h1>
+          <p className="text-sm text-slate-500">Real-time metrics, workload breakdown, community priority trends, and SLA performance.</p>
+        </div>
       </div>
 
       {/* Top Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="card p-4 flex items-center gap-4 border-l-4 border-l-blue-500">
-          <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+        <div className="card p-5 flex items-center gap-4 border-l-4 border-l-blue-600 bg-white/90">
+          <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
             <FileText className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{overview.total}</p>
-            <p className="text-xs text-gray-500 font-semibold uppercase">Total Complaints</p>
+            <p className="text-3xl font-extrabold text-slate-900">{overview.total}</p>
+            <p className="text-xs text-slate-400 font-extrabold uppercase tracking-wider">Total Grievances</p>
           </div>
         </div>
 
-        <div className="card p-4 flex items-center gap-4 border-l-4 border-l-green-500">
-          <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
-            <CheckCircle className="w-6 h-6" />
+        <div className="card p-5 flex items-center gap-4 border-l-4 border-l-emerald-500 bg-white/90">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+            <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{overview.resolved}</p>
-            <p className="text-xs text-gray-500 font-semibold uppercase">Successfully Resolved</p>
+            <p className="text-3xl font-extrabold text-slate-900">{overview.resolved}</p>
+            <p className="text-xs text-slate-400 font-extrabold uppercase tracking-wider">Resolved</p>
           </div>
         </div>
 
-        <div className="card p-4 flex items-center gap-4 border-l-4 border-l-amber-500">
-          <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600">
+        <div className="card p-5 flex items-center gap-4 border-l-4 border-l-amber-500 bg-white/90">
+          <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
             <Clock className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">{overview.pending}</p>
-            <p className="text-xs text-gray-500 font-semibold uppercase">Pending Resolution</p>
+            <p className="text-3xl font-extrabold text-slate-900">{overview.pending}</p>
+            <p className="text-xs text-slate-400 font-extrabold uppercase tracking-wider">Pending</p>
           </div>
         </div>
 
-        <div className="card p-4 flex items-center gap-4 border-l-4 border-l-red-500">
-          <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600">
+        <div className="card p-5 flex items-center gap-4 border-l-4 border-l-rose-600 bg-white/90">
+          <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">
             <AlertTriangle className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-2xl font-bold text-red-600">{overview.slaBreaches}</p>
-            <p className="text-xs text-gray-500 font-semibold uppercase">SLA Breaches</p>
+            <p className="text-3xl font-extrabold text-rose-600">{overview.slaBreaches}</p>
+            <p className="text-xs text-slate-400 font-extrabold uppercase tracking-wider">SLA Breaches</p>
           </div>
         </div>
       </div>
 
-      {/* Semantic Duplicate Cluster Alert banner */}
-      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 flex items-center justify-between">
+      {/* Semantic Clustering Banner */}
+      <div className="bg-gradient-to-r from-indigo-900 to-blue-900 text-white rounded-2xl p-5 shadow-lg border border-indigo-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-600 text-white rounded-lg">
-            <Layers className="w-5 h-5" />
+          <div className="p-2.5 bg-white/10 backdrop-blur-md text-amber-300 rounded-xl">
+            <Layers className="w-6 h-6" />
           </div>
           <div>
-            <p className="font-bold text-indigo-950 text-sm">Semantic Vector Clustering Active</p>
-            <p className="text-xs text-indigo-800">
-              Discovered <span className="font-bold">{duplicateClusters} active duplicate/near-duplicate clusters</span> using FAISS cosine distance.
+            <p className="font-extrabold text-white text-base">FAISS Semantic Vector Clustering Engine</p>
+            <p className="text-xs text-slate-300 mt-0.5">
+              Discovered <strong className="text-amber-300 font-extrabold">{duplicateClusters} duplicate clusters</strong> using multilingual e5 embeddings.
             </p>
           </div>
         </div>
-        <span className="badge bg-indigo-200 text-indigo-900 font-mono">Top-K Vector Search</span>
+        <span className="badge bg-white/20 text-white border border-white/20 font-mono text-xs">Top-K Vector Index Active</span>
       </div>
 
-      {/* Recharts Data Visualization Section */}
+      {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Category Breakdown Bar Chart */}
-        <div className="card shadow-sm">
-          <h3 className="font-bold text-gray-900 text-sm mb-4">Grievance Distribution by Category</h3>
+        {/* Category Breakdown */}
+        <div className="card shadow-sm border-slate-200/80">
+          <h3 className="font-extrabold text-slate-900 text-base mb-4">Grievances by Category</h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={categoryDistribution.map(d => ({ name: d._id, count: d.count }))}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" angle={-20} textAnchor="end" height={60} tick={{ fontSize: 11 }} />
-              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="name" angle={-20} textAnchor="end" height={60} tick={{ fontSize: 11, fill: '#64748b' }} />
+              <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip />
-              <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" fill="#3b82f6" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Priority Pie Chart */}
-        <div className="card shadow-sm">
-          <h3 className="font-bold text-gray-900 text-sm mb-4">Priority Severity Split</h3>
+        {/* Priority Severity Pie */}
+        <div className="card shadow-sm border-slate-200/80">
+          <h3 className="font-extrabold text-slate-900 text-base mb-4">Priority Severity Distribution</h3>
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
               <Pie
@@ -139,32 +144,32 @@ export default function AdminAnalytics() {
           </ResponsiveContainer>
         </div>
 
-        {/* Department Workload Vertical Bar Chart */}
-        <div className="card shadow-sm">
-          <h3 className="font-bold text-gray-900 text-sm mb-4">Pending Workload by Department</h3>
+        {/* Department Workload */}
+        <div className="card shadow-sm border-slate-200/80">
+          <h3 className="font-extrabold text-slate-900 text-base mb-4">Pending Workload by Department</h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={departmentLoad.map(d => ({ name: d._id, pending: d.count }))} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" type="category" width={140} tick={{ fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis type="number" tick={{ fontSize: 11, fill: '#64748b' }} />
+              <YAxis dataKey="name" type="category" width={140} tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip />
-              <Bar dataKey="pending" fill="#f59e0b" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="pending" fill="#f59e0b" radius={[0, 6, 6, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Weekly Trend Line Chart */}
-        <div className="card shadow-sm">
-          <h3 className="font-bold text-gray-900 text-sm mb-4">Weekly Grievance Inflow vs. Resolution</h3>
+        {/* Weekly Trend */}
+        <div className="card shadow-sm border-slate-200/80">
+          <h3 className="font-extrabold text-slate-900 text-base mb-4">Weekly Inflow vs. Resolution</h3>
           <ResponsiveContainer width="100%" height={260}>
             <LineChart data={weeklyTrend}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="_id" tick={{ fontSize: 12 }} />
-              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="_id" tick={{ fontSize: 11, fill: '#64748b' }} />
+              <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="submitted" stroke="#3b82f6" strokeWidth={2} name="Submitted" />
-              <Line type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={2} name="Resolved" />
+              <Line type="monotone" dataKey="submitted" stroke="#3b82f6" strokeWidth={2.5} name="Submitted" />
+              <Line type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={2.5} name="Resolved" />
             </LineChart>
           </ResponsiveContainer>
         </div>

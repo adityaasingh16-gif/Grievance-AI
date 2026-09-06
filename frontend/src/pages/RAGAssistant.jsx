@@ -57,36 +57,36 @@ export default function RAGAssistant() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <div className="p-3 bg-indigo-100 rounded-xl text-indigo-700">
+        <div className="p-3 bg-gradient-to-br from-indigo-500 to-blue-600 text-white rounded-2xl shadow-lg shadow-indigo-500/20">
           <Bot className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">RAG Official SOP Assistant</h1>
-          <p className="text-sm text-gray-500">Instant answers grounded in official department Standard Operating Procedures</p>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">RAG Official SOP Assistant</h1>
+          <p className="text-sm text-slate-500">Retrieval-Augmented Generation chatbot grounded in official department Standard Operating Procedures.</p>
         </div>
       </div>
 
-      <div className="card shadow-md flex flex-col h-[550px] p-0 overflow-hidden">
-        {/* Chat Messages Log */}
-        <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-gray-50/50">
+      <div className="card shadow-lg p-0 border-slate-200/80 rounded-3xl overflow-hidden flex flex-col h-[580px] bg-white">
+        {/* Chat History Area */}
+        <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-50/50">
           {messages.map((m, idx) => (
             <div key={idx} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed ${
+              <div className={`max-w-[82%] rounded-2xl p-4 text-sm leading-relaxed ${
                 m.sender === 'user'
-                  ? 'bg-primary-600 text-white rounded-br-none shadow-sm'
-                  : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-br-none shadow-md shadow-blue-500/20'
+                  : 'bg-white border border-slate-200/90 text-slate-800 rounded-bl-none shadow-sm font-medium'
               }`}>
                 <p className="whitespace-pre-wrap">{m.text}</p>
 
                 {m.sources && m.sources.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-gray-100 text-xs">
-                    <p className="font-semibold text-indigo-700 mb-1 flex items-center gap-1">
-                      <BookOpen className="w-3.5 h-3.5" /> Reference Grounded SOP Source:
+                  <div className="mt-3 pt-3 border-t border-slate-100 text-xs space-y-2">
+                    <p className="font-extrabold text-indigo-700 flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5" /> Grounded SOP Source Reference:
                     </p>
                     {m.sources.map((src, i) => (
-                      <div key={i} className="bg-indigo-50/80 p-2 rounded border border-indigo-100 text-indigo-900 mt-1">
+                      <div key={i} className="bg-indigo-50/90 p-3 rounded-xl border border-indigo-200/80 text-indigo-950">
                         <p className="font-bold">{src.title} ({src.department})</p>
-                        <p className="text-[11px] text-indigo-800 mt-0.5">{src.content}</p>
+                        <p className="text-xs text-indigo-800 mt-1 font-medium leading-relaxed">{src.content}</p>
                       </div>
                     ))}
                   </div>
@@ -97,22 +97,22 @@ export default function RAGAssistant() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-white border border-gray-200 p-4 rounded-2xl text-sm flex items-center gap-2 text-gray-500">
-                <Loader2 className="w-4 h-4 animate-spin text-indigo-600" />
-                Searching SOP vector index &amp; generating grounded answer...
+              <div className="bg-white border border-slate-200 p-4 rounded-2xl text-xs font-semibold flex items-center gap-2 text-slate-500 shadow-sm">
+                <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
+                Searching SOP vector index &amp; generating grounded response...
               </div>
             </div>
           )}
         </div>
 
-        {/* Input Bar */}
-        <form onSubmit={handleAsk} className="p-4 bg-white border-t border-gray-200 flex gap-3 items-center">
+        {/* Input Controls Bar */}
+        <form onSubmit={handleAsk} className="p-4 bg-white border-t border-slate-200/80 flex gap-3 items-center">
           <select
             value={department}
             onChange={e => setDepartment(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-xs bg-gray-50 text-gray-700 border-gray-300 focus:outline-none"
+            className="input-field py-2 text-xs w-auto min-h-[44px] shrink-0"
           >
-            <option value="">All SOPs</option>
+            <option value="">All SOP Manuals</option>
             <option value="Water Supply">Water Supply</option>
             <option value="Electricity">Electricity</option>
             <option value="Roads & Infrastructure">Roads &amp; Infra</option>
@@ -124,13 +124,13 @@ export default function RAGAssistant() {
             value={question}
             onChange={e => setQuestion(e.target.value)}
             placeholder="Ask a question (e.g., 'What is the SOP for water pipeline burst repair?')..."
-            className="flex-1 border rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary-500 focus:outline-none"
+            className="input-field flex-1 min-h-[44px]"
           />
 
           <button
             type="submit"
             disabled={loading || !question.trim()}
-            className="btn-primary py-2.5 px-5 flex items-center gap-2 disabled:opacity-50 font-semibold text-sm"
+            className="btn-primary py-2.5 px-6 font-bold text-sm min-h-[44px]"
           >
             <Send className="w-4 h-4" /> Ask RAG
           </button>

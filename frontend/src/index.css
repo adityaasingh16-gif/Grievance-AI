@@ -2,17 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased font-sans selection:bg-blue-500 selection:text-white;
+  }
+}
+
 @layer components {
+  /* Premium Primary Button with Scale Animation & Soft Shadow */
   .btn-primary {
-    @apply px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium cursor-pointer shadow-sm;
+    @apply px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-semibold shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 active:scale-[0.98] transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer border border-blue-500/20 disabled:opacity-50 disabled:pointer-events-none disabled:transform-none min-h-[44px];
   }
+
+  /* Secondary Button */
   .btn-secondary {
-    @apply px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium cursor-pointer;
+    @apply px-5 py-2.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/90 rounded-xl font-semibold shadow-sm hover:border-slate-300 active:scale-[0.98] transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer min-h-[44px];
   }
+
+  /* Outline Glass Button */
+  .btn-outline {
+    @apply px-4 py-2 border border-blue-500/30 text-blue-600 hover:bg-blue-50/80 rounded-xl font-semibold active:scale-[0.98] transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer min-h-[44px];
+  }
+
+  /* Elevated Glass Card */
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+    @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-200 p-6;
   }
+
+  /* Glass Badge Pills */
   .badge {
-    @apply px-2.5 py-1 text-xs font-semibold rounded-full inline-flex items-center gap-1;
+    @apply px-3 py-1 text-xs font-bold rounded-full inline-flex items-center gap-1.5 transition-all duration-150 tracking-wide;
   }
+
+  /* Input & Select Styling */
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 text-sm focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 focus:outline-none transition-all duration-150 placeholder:text-slate-400 min-h-[44px];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Smooth Entrance Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
 }
