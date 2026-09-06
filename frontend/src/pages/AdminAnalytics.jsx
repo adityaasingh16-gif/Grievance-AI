@@ -5,8 +5,8 @@ import {
   PieChart, Pie, Cell, LineChart, Line, ResponsiveContainer
 } from 'recharts'
 import { FileText, CheckCircle2, Clock, AlertTriangle, Layers, Activity, Sparkles } from 'lucide-react'
+import { API_URL } from '../config'
 
-const API_URL = import.meta.env.VITE_API_URL || ''
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16']
 
 export default function AdminAnalytics() {

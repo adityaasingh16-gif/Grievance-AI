@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Send, MapPin, Loader2, CheckCircle2, Sparkles, Image as ImageIcon, FileText, ArrowRight } from 'lucide-react'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function CitizenSubmit() {
   const [title, setTitle] = useState('')

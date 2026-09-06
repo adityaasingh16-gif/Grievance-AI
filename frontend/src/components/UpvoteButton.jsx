@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { ThumbsUp } from 'lucide-react'
 import axios from 'axios'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function UpvoteButton({ issueId, initialCount = 0, initialHasVoted = false, onVoteToggle }) {
   const [upvoteCount, setUpvoteCount] = useState(initialCount)

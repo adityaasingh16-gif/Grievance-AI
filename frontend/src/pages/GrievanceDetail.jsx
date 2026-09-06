@@ -3,8 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Clock, MapPin, User, AlertTriangle, CheckCircle, ArrowLeft, Sparkles, Layers } from 'lucide-react'
 import { format } from 'date-fns'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function GrievanceDetail() {
   const { id } = useParams()

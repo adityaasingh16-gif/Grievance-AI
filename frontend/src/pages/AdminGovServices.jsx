@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Plus, Edit2, Trash2, Shield, Save, X } from 'lucide-react'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 const CATEGORIES = [
   'Police & Emergency',

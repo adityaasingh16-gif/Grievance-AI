@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Phone, Search, ShieldAlert, HeartPulse, Flame, Lock, Building2, ChevronDown, ChevronUp } from 'lucide-react'
 import ServiceCard from '../components/ServiceCard'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 const CATEGORY_ICONS = {
   'Police & Emergency': ShieldAlert,

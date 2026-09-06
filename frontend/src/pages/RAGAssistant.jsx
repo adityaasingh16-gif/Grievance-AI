@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { MessageSquare, Send, Sparkles, BookOpen, Loader2, Bot } from 'lucide-react'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function RAGAssistant() {
   const [question, setQuestion] = useState('')

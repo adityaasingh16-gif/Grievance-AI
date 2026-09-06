@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Filter, Clock, AlertTriangle, CheckCircle2, ArrowRight, ThumbsUp, ShieldAlert } from 'lucide-react'
 import { format, isPast } from 'date-fns'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function OfficerDashboard() {
   const [grievances, setGrievances] = useState([])

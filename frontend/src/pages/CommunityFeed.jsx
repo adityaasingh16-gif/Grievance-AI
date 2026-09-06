@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { ThumbsUp, Search, MapPin, Sparkles, Filter, PlusCircle, Flame, Clock, Image as ImageIcon, CheckCircle2, ArrowRight } from 'lucide-react'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 const CATEGORIES = ['All', 'Water Supply', 'Electricity', 'Roads & Infrastructure', 'Sanitation', 'Public Transport', 'Healthcare', 'Education', 'Corruption & Misconduct']
 
 export default function CommunityFeed() {

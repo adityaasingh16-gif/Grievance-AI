@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { PlusCircle, Upload, MapPin, AlertCircle, ArrowLeft, CheckCircle2 } from 'lucide-react'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 const CATEGORIES = ['Roads', 'Sanitation', 'Electricity', 'Public Safety', 'Water Supply', 'Healthcare', 'Education', 'Other']
 

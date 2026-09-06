@@ -3,8 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Clock, MapPin, User, AlertTriangle, CheckCircle2, Sparkles, ChevronRight, ThumbsUp } from 'lucide-react'
 import { format } from 'date-fns'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 const statusSteps = ['Submitted', 'Categorized', 'Assigned', 'InProgress', 'Resolved']
 
 export default function CitizenTrack() {

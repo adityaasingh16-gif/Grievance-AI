@@ -4,8 +4,7 @@ import axios from 'axios'
 import { ArrowLeft, MapPin, User, Clock, ShieldCheck } from 'lucide-react'
 import UpvoteButton from '../components/UpvoteButton'
 import { formatDistanceToNow } from 'date-fns'
-
-const API_URL = import.meta.env.VITE_API_URL || ''
+import { API_URL } from '../config'
 
 export default function IssueDetail() {
   const { id } = useParams()
